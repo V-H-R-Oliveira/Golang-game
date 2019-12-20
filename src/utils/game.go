@@ -56,7 +56,7 @@ func playerRound(board *[][]string, player *Player) {
 		(*board)[x][y] = player.Option
 	}
 
-	if verifyWinner(*board) {
+	if verifyWinner(board) {
 		DisplayBoard(board)
 		fmt.Printf("The winner was %s\n", player.Nickname)
 		os.Exit(0)
@@ -102,23 +102,23 @@ func isFull(board *[][]string) bool {
 	return true
 }
 
-func verifyWinner(board [][]string) bool {
-	for row := 0; row < len(board); row++ {
-		if board[row][0] != EmptyCel && board[row][0] == board[row][1] && board[row][0] == board[row][2] {
+func verifyWinner(board *[][]string) bool {
+	for row := 0; row < len(*board); row++ {
+		if (*board)[row][0] != EmptyCel && (*board)[row][0] == (*board)[row][1] && (*board)[row][0] == (*board)[row][2] {
 			return true
 		}
 
 		for col := 0; col < 3; col++ {
-			if board[0][col] != EmptyCel && board[0][col] == board[1][col] && board[0][col] == board[2][col] {
+			if (*board)[0][col] != EmptyCel && (*board)[0][col] == (*board)[1][col] && (*board)[0][col] == (*board)[2][col] {
 				return true
 			}
 
-			if board[1][1] != EmptyCel {
-				if board[1][1] == board[0][0] && board[1][1] == board[2][2] {
+			if (*board)[1][1] != EmptyCel {
+				if (*board)[1][1] == (*board)[0][0] && (*board)[1][1] == (*board)[2][2] {
 					return true
 				}
 
-				if board[1][1] == board[0][2] && board[1][1] == board[2][0] {
+				if (*board)[1][1] == (*board)[0][2] && (*board)[1][1] == (*board)[2][0] {
 					return true
 				}
 			}
